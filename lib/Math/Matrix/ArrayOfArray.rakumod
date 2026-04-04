@@ -29,10 +29,10 @@ our sub clone (@m) {[ @m.map: {[ $^row.flat.map({$^element.clone}) ]} ]}
 ################################################################################
 
 our sub check-data (@m) {
-    fail "Expect an Array or Array or List of Lists" unless (@m ~~ Array and all @m ~~ Array)
-                                                         or (@m ~~ List and all @m ~~ List);
+    fail "Expect an Array of Arrays or List of Lists" unless (@m ~~ Array and all(@m) ~~ Array)
+                                                          or (@m ~~ List and all(@m) ~~ List);
     fail "Expect the Array or List to have elements" if @m == 0 or @m[0] == 0;
-    fail "All rows must contains the same number of elements" unless @m == 1 or @m[0] == all @m[*];
+    fail "All rows must contain the same number of elements" unless @m == 1 or @m[0] == all @m[*];
     fail "All rows must contain only numeric values" unless all( @m[*;*] ) ~~ Numeric;
 }
 
