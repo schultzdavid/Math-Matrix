@@ -62,7 +62,7 @@ multi method new( @m ) {
     self.bless( rows => @m );
 }
 multi method new (Str $m){
-    Math::Matrix.new( $m.lines.map: { .words.map: {.Bool.Str eq $_ ?? .Bool !! .Numeric} } );
+    Math::Matrix.new( $m.lines.map: { .words.map: {$_ eq "False" ?? False !! $_ eq "True" ?? True !! .Numeric} } );
 }
 
 submethod BUILD( :@rows!, :$density, :$trace, :$determinant, :$rank, :$nullity,
